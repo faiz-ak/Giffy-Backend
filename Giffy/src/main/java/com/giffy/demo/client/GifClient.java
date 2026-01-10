@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(
-        name = "GifClient",
+        name = "giphySearchClient",
         url = "${giphy.api.url}"
 )
 public interface GifClient {
