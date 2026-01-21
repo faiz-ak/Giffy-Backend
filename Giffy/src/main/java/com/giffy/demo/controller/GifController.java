@@ -22,16 +22,28 @@ public class GifController {
     @Value("${giphy.api.key}")
     private String apiKey;
 
+    // 🔼 INCREASE LIMIT HERE
+    private static final int LIMIT = 24;
+
     public GifController(GifClient gifClient, GifBinaryClient gifBinaryClient) {
         this.gifClient = gifClient;
         this.gifBinaryClient = gifBinaryClient;
     }
 
     @GetMapping("/gifs")
-    public List<String> getMultipleGifs(@RequestParam String q) {
+    public List<String> getMultipleGifs(
+            @RequestParam String q,
+            @RequestParam(defaultValue = "0") int offset
+    ) {
 
         Map<String, Object> response =
-                (Map<String, Object>) gifClient.searchGif(apiKey, q, 12, "g");
+                (Map<String, Object>) gifClient.searchGif(
+                        apiKey,
+                        q,
+                        LIMIT,
+                        "g",
+                        offset
+                );
 
         List<Map<String, Object>> data =
                 (List<Map<String, Object>>) response.get("data");

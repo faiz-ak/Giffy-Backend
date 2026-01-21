@@ -3,7 +3,6 @@ package com.giffy.demo.client;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 @FeignClient(
         name = "giphySearchClient",
         url = "${giphy.api.url}"
@@ -15,6 +14,8 @@ public interface GifClient {
             @RequestParam("api_key") String apiKey,
             @RequestParam("q") String query,
             @RequestParam("limit") int limit,
-            @RequestParam("rating") String rating
+            @RequestParam("rating") String rating,
+            @RequestParam("offset") int offset   // ✅ REQUIRED for pagination
     );
 }
+
